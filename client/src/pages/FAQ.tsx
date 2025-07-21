@@ -4,8 +4,20 @@ import { Badge } from "@/components/ui/badge";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { ChevronDown, HelpCircle, Users, Building2, Settings, Shield } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
-import logoPath from "@assets/RepairRequest Logo Transparent_1750783382845.png";
+import { useState, ReactNode } from "react";
+
+type FAQItem = {
+  question: string;
+  answer: ReactNode;
+};
+
+type FAQCategory = {
+  title: string;
+  icon: React.ElementType;
+  color: string;
+  questions: FAQItem[];
+};
+
 
 export default function FAQ() {
   const [openItems, setOpenItems] = useState<number[]>([]);
@@ -18,7 +30,7 @@ export default function FAQ() {
     );
   };
 
-  const faqCategories = [
+  const faqCategories: FAQCategory[] = [
     {
       title: "Getting Started",
       icon: HelpCircle,
@@ -26,15 +38,23 @@ export default function FAQ() {
       questions: [
         {
           question: "How do I get access to RepairRequest?",
-          answer: "Contact your organization's administrator to get access credentials. They can create an account for you and assign the appropriate role (requester, maintenance staff, or admin)."
+          answer: (
+            <>
+              Contact your organization's administrator to get access credentials. They can create an account for you and assign the appropriate role (requester, maintenance staff, or admin). If you are an administrator and need to set up your organization, please <a href="https://calendly.com/schoolhouselogistics/30min" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">reach out to us</a>.
+            </>
+          )
         },
         {
           question: "What do I need to sign in?",
-          answer: "RepairRequest uses Google OAuth for secure authentication. You'll need a Google account with an email address that's been authorized by your organization."
+          answer: "Your organization must first provide your login credentials to RepairRequest. If you haven’t received your username or password, please contact your organization’s administrator or support team to ensure your access has been set up."
         },
         {
           question: "How do I submit my first repair request?",
-          answer: "After logging in, click 'New Request' from your dashboard. Choose between Facility Request (for events/scheduling) or Repair Request (for maintenance/repairs), fill out the form with details and photos, then submit."
+          answer: (
+            <>
+              Simply click on Repair Request and submit your request. or watch this <a href="https://youtu.be/YJKovUoKS_E?si=Y1FXuhXvw0FeZ9WG" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">video tutorial</a>.
+            </>
+          )
         },
         {
           question: "Can I attach photos to my requests?",
@@ -48,8 +68,8 @@ export default function FAQ() {
       color: "green",
       questions: [
         {
-          question: "What's the difference between Facility and Building requests?",
-          answer: "Facility requests are for scheduling events, room bookings, and equipment needs. Building requests are for maintenance issues, repairs, and building-related problems."
+          question: "What's the difference between Labor and Building requests?",
+          answer: "Labor requests are for scheduling events, room bookings, and equipment needs. Building requests are for maintenance issues, repairs, and building-related problems."
         },
         {
           question: "How do I track the status of my request?",
@@ -66,29 +86,6 @@ export default function FAQ() {
         {
           question: "What happens if my request is urgent?",
           answer: "Set the priority level to 'High' or 'Urgent' when submitting. Urgent requests are highlighted for administrators and maintenance staff, ensuring faster response times."
-        }
-      ]
-    },
-    {
-      title: "User Roles & Permissions",
-      icon: Users,
-      color: "purple",
-      questions: [
-        {
-          question: "What are the different user roles?",
-          answer: "There are four main roles: Requester (submit requests), Maintenance Staff (handle requests), Admin (manage organization), and Super Admin (manage multiple organizations)."
-        },
-        {
-          question: "Can I see other people's requests?",
-          answer: "Requesters can only see their own requests. Maintenance staff can see assigned requests. Admins can see all requests within their organization."
-        },
-        {
-          question: "How do I become a maintenance staff member?",
-          answer: "Your organization's administrator needs to change your role from 'requester' to 'maintenance'. Contact them to request this change if you need to handle maintenance requests."
-        },
-        {
-          question: "Can I manage multiple buildings or organizations?",
-          answer: "Admin users can manage multiple buildings within their organization. Super Admin users can manage multiple organizations entirely."
         }
       ]
     },
@@ -111,7 +108,7 @@ export default function FAQ() {
         },
         {
           question: "What if I forget my password?",
-          answer: "RepairRequest uses Google authentication, so you don't have a separate password. If you can't access your Google account, use Google's password recovery process."
+          answer: "If you forget your password, you can use the 'Forgot Password' link on the login page to reset it. You will receive an email with instructions on how to set a new password. If you continue to have trouble, please contact your organization's administrator."
         },
         {
           question: "How long is my data stored?",
@@ -151,7 +148,7 @@ export default function FAQ() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-3">
-              <img src={logoPath} alt="RepairRequest Logo" className="w-10 h-10" />
+              <img src="/Logo.png" alt="RepairRequest Logo" className="w-10 h-10" />
               <div>
                 <h1 className="text-xl font-bold text-gray-900">RepairRequest</h1>
                 <p className="text-sm text-gray-600">by SchoolHouse Logistics</p>
@@ -247,7 +244,7 @@ export default function FAQ() {
                           </CollapsibleTrigger>
                           <CollapsibleContent>
                             <CardContent className="pt-0">
-                              <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                              <div className="text-gray-600 leading-relaxed">{faq.answer}</div>
                             </CardContent>
                           </CollapsibleContent>
                         </Collapsible>
@@ -291,7 +288,7 @@ export default function FAQ() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-4">
-                <img src={logoPath} alt="RepairRequest Logo" className="w-8 h-8" />
+                <img src="/Logo.png" alt="RepairRequest Logo" className="w-8 h-8" />
                 <div>
                   <h3 className="text-lg font-bold">RepairRequest</h3>
                   <p className="text-sm text-gray-400">by SchoolHouse Logistics</p>

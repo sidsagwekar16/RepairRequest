@@ -1,11 +1,17 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { CheckCircle, Users, Clock, Shield, Mail, Building2, Settings, BarChart3 } from "lucide-react";
+import { CheckCircle, Users, Clock, Shield, Mail, Building2, BarChart3 } from "lucide-react";
 import { Link } from "react-router-dom";
-import logoPath from "@assets/RepairRequest Logo Transparent_1750783382845.png";
+import { useState } from "react";
 
 export default function LandingPage() {
+  const [showVideo, setShowVideo] = useState(false);
+
+  const handleVideoEnd = () => {
+    setShowVideo(false);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Header */}
@@ -13,7 +19,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-3">
-              <img src={logoPath} alt="RepairRequest Logo" className="w-10 h-10" />
+              <img src="/RepairRequest Logo Transparent_1750783382845.png" alt="RepairRequest Logo" className="w-10 h-10" />
               <div>
                 <h1 className="text-xl font-bold text-gray-900">RepairRequest</h1>
                 <p className="text-sm text-gray-600">by SchoolHouse Logistics</p>
@@ -85,21 +91,33 @@ export default function LandingPage() {
           {/* Right Video */}
           <div className="relative">
             <div className="aspect-video bg-gradient-to-br from-blue-100 to-indigo-200 rounded-2xl shadow-2xl overflow-hidden">
-              {/* Placeholder for video - you can replace this with actual video component */}
-              <div className="w-full h-full flex items-center justify-center bg-gray-900 relative">
-                <div className="text-center text-white">
-                  <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 cursor-pointer hover:bg-blue-700 transition-colors">
-                    <svg className="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
+              {showVideo ? (
+                <video
+                  src="/RepairRequest Standard.mp4"
+                  controls
+                  autoPlay
+                  className="w-full h-full"
+                  onEnded={handleVideoEnd}
+                />
+              ) : (
+                <div
+                  className="w-full h-full flex items-center justify-center bg-gray-900 relative cursor-pointer"
+                  onClick={() => setShowVideo(true)}
+                >
+                  <div className="text-center text-white">
+                    <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center mx-auto mb-4 hover:bg-blue-700 transition-colors">
+                      <svg className="w-8 h-8 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">See RepairRequest in Action</h3>
+                    <p className="text-gray-300 text-sm">Watch how easy it is to manage maintenance requests</p>
                   </div>
-                  <h3 className="text-lg font-semibold mb-2">See RepairRequest in Action</h3>
-                  <p className="text-gray-300 text-sm">Watch how easy it is to manage maintenance requests</p>
-                </div>
 
-                {/* Video overlay effect */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-              </div>
+                  {/* Video overlay effect */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                </div>
+              )}
             </div>
 
             {/* Decorative elements */}
@@ -306,7 +324,7 @@ export default function LandingPage() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
             <div className="flex items-center space-x-3 mb-4">
-              <img src={logoPath} alt="RepairRequest Logo" className="w-8 h-8" />
+              <img src="/Logo.png" alt="RepairRequest Logo" className="w-8 h-8" />
               <div>
                 <h3 className="text-lg font-bold">RepairRequest</h3>
                 <p className="text-sm text-gray-400">by SchoolHouse Logistics</p>

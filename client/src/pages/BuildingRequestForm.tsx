@@ -191,7 +191,7 @@ export default function BuildingRequestForm() {
                     name="facility"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Facility</FormLabel>
+                        <FormLabel>Labor</FormLabel>
                         <Select 
                           onValueChange={(value) => {
                             field.onChange(value);

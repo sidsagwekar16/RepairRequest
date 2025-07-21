@@ -66,7 +66,7 @@ export default function RequestDetail({ id }: RequestDetailProps) {
           <Card>
             <CardContent className="pt-6">
               <p>The requested maintenance request could not be found or you do not have permission to view it.</p>
-              <Button className="mt-4" onClick={() => navigate("/")}>
+              <Button className="mt-4" onClick={() => navigate("/dashboard")}>
                 Return to Dashboard
               </Button>
             </CardContent>

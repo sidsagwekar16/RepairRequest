@@ -3,7 +3,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, X } from "lucide-react";
 import { Link } from "react-router-dom";
-import logoPath from "@assets/RepairRequest Logo Transparent_1750783382845.png";
 
 export default function Pricing() {
   return (
@@ -13,7 +12,7 @@ export default function Pricing() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-3">
-              <img src={logoPath} alt="RepairRequest Logo" className="w-10 h-10" />
+              <img src="/Logo.png" alt="RepairRequest Logo" className="w-10 h-10" />
               <div>
                 <h1 className="text-xl font-bold text-gray-900">RepairRequest</h1>
                 <p className="text-sm text-gray-600">by SchoolHouse Logistics</p>
@@ -34,11 +33,11 @@ export default function Pricing() {
               <Link to="/support" className="text-gray-600 hover:text-blue-600 transition-colors">
                 Support
               </Link>
-                <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white ml-4">
-              <Link to="/login">
+              <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white ml-4">
+                <Link to="/login">
                   Login to Portal
-              </Link>
-                </Button>
+                </Link>
+              </Button>
             </nav>
 
             {/* Mobile Menu Button */}
@@ -108,9 +107,12 @@ export default function Pricing() {
                     <span className="text-gray-400">Advanced analytics</span>
                   </li>
                 </ul>
-                <Button className="w-full mt-6" variant="outline">
-                  Get Started
-                </Button>
+                <Link to="https://calendly.com/schoolhouselogistics/30min">
+                  <Button className="w-full mt-6" variant="outline">
+                    Get Started
+                  </Button>
+                </Link>
+
               </CardContent>
             </Card>
 
@@ -154,9 +156,11 @@ export default function Pricing() {
                     <span>Priority support</span>
                   </li>
                 </ul>
-                <Button className="w-full mt-6 bg-blue-600 hover:bg-blue-700">
-                  Get Started
-                </Button>
+                <Link to="https://calendly.com/schoolhouselogistics/30min">
+                  <Button className="w-full mt-6 bg-blue-600 hover:bg-blue-700">
+                    Get Started
+                  </Button>
+                </Link>
               </CardContent>
             </Card>
 
@@ -270,7 +274,7 @@ export default function Pricing() {
             <div>
               <Link to="/landing">
                 <div className="flex items-center space-x-3 mb-4 cursor-pointer">
-                  <img src={logoPath} alt="RepairRequest Logo" className="w-8 h-8" />
+                  <img src="/Logo.png" alt="RepairRequest Logo" className="w-8 h-8" />
                   <div>
                     <h3 className="text-lg font-bold">RepairRequest</h3>
                     <p className="text-sm text-gray-400">by SchoolHouse Logistics</p>

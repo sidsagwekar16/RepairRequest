@@ -3,7 +3,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle, Users, Clock, Shield, Mail, Building2, Settings, BarChart3 } from "lucide-react";
 import { Link } from "react-router-dom";
-import logoPath from "@assets/RepairRequest Logo Transparent_1750783382845.png";
 
 export default function HeroLanding() {
   return (
@@ -13,7 +12,7 @@ export default function HeroLanding() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-3">
-              <img src={logoPath} alt="RepairRequest Logo" className="w-10 h-10" />
+              <img src="/RepairRequest Logo Transparent_1750783382845.png" alt="RepairRequest Logo" className="w-10 h-10" />
               <div>
                 <h1 className="text-xl font-bold text-gray-900">RepairRequest</h1>
                 <p className="text-sm text-gray-600">by SchoolHouse Logistics</p>
@@ -252,7 +251,7 @@ export default function HeroLanding() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div>
               <div className="flex items-center space-x-3 mb-4">
-                <img src={logoPath} alt="RepairRequest Logo" className="w-8 h-8" />
+                <img src="/RepairRequest Logo Transparent_1750783382845.png" alt="RepairRequest Logo" className="w-8 h-8" />
                 <div>
                   <h3 className="text-lg font-bold">RepairRequest</h3>
                   <p className="text-sm text-gray-400">by SchoolHouse Logistics</p>
