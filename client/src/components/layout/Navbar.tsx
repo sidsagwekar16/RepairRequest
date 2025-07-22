@@ -36,8 +36,6 @@ export default function Navbar({ toggleMobileSidebar, user }: NavbarProps) {
     { href: "/room-history", label: "Room History", icon: "history", access: "admin" },
     { href: "/reports", label: "Reports", icon: "assessment", access: "admin" },
     { href: "/assigned-requests", label: "Assigned to Me", icon: "engineering", access: "admin" },
-    { href: "/new-building-request", label: "New Repair Request", icon: "home_repair_service", access: "admin" },
-    { href: "/new-facilities-request", label: "New Labor Request", icon: "event_seat", access: "admin" },
   ] : user?.role === 'maintenance' ? [
     { href: "/dashboard", label: "Dashboard", icon: "dashboard", access: "maintenance" },
     { href: "/assigned-requests", label: "Assigned to Me", icon: "engineering", access: "maintenance" },
@@ -120,7 +118,7 @@ export default function Navbar({ toggleMobileSidebar, user }: NavbarProps) {
                       await fetch("/api/logout", { credentials: "include" });
                       // Clear React Query cache
                       queryClient.clear();
-                      window.location.href = "/landing";
+                      window.location.href = "/";
                     }}
                   >
                     <span className="material-icons text-sm mr-2">logout</span>
