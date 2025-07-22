@@ -174,8 +174,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
             failed++;
             continue;
           }
-          // Generate a random password for the user
-          const tempPassword = crypto.randomBytes(8).toString('hex');
+          // Use default password for all new users
+          const tempPassword = 'Password123!';
           const hashedPassword = await bcrypt.hash(tempPassword, 10);
 
           await dbStorage.upsertUser({
