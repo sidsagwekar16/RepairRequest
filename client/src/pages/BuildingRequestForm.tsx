@@ -14,6 +14,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ArrowLeft } from "lucide-react";
 import { PhotoUpload } from "@/components/ui/PhotoUpload";
+import { useAuth } from "@/hooks/useAuth";
 
 const buildingRequestSchema = z.object({
   requestType: z.literal("building"),
@@ -33,9 +34,12 @@ const buildingRequestSchema = z.object({
 type BuildingRequestFormValues = z.infer<typeof buildingRequestSchema>;
 
 export default function BuildingRequestForm() {
+  const { user, isLoading } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Remove the admin restriction block
 
   // Fetch organization buildings
   const { data: buildings, isLoading: buildingsLoading, error: buildingsError } = useQuery({

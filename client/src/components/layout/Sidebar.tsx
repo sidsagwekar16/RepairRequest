@@ -28,17 +28,13 @@ export default function Sidebar({ isMobileOpen, closeMobileSidebar, user }: Side
     { href: "/admin/buildings-facilities", label: "Buildings & Facilities", icon: "domain", access: "super_admin" },
     { href: "/admin/users", label: "User Management", icon: "group", access: "super_admin" },
     { href: "/manage-requests", label: "Manage Requests", icon: "manage_accounts", access: "super_admin" },
-    // { href: "/reports", label: "Reports", icon: "assessment", access: "super_admin" },
   ] : isAdmin ? [
     // Admin menu order
     { href: "/dashboard", label: "Dashboard", icon: "dashboard", access: "admin" },
-    // { href: "/admin/users", label: "User Management", icon: "group", access: "admin" },
     { href: "/manage-requests", label: "Manage Requests", icon: "manage_accounts", access: "admin" },
     { href: "/room-history", label: "Room History", icon: "history", access: "admin" },
     { href: "/reports", label: "Reports", icon: "assessment", access: "admin" },
     { href: "/assigned-requests", label: "Assigned to Me", icon: "engineering", access: "admin" },
-    { href: "/new-building-request", label: "New Repair Request", icon: "home_repair_service", access: "admin" },
-    { href: "/new-facilities-request", label: "New Labor Request", icon: "event_seat", access: "admin" },
   ] : user?.role === 'maintenance' ? [
     // Maintenance menu order
     { href: "/dashboard", label: "Dashboard", icon: "dashboard", access: "maintenance" },
