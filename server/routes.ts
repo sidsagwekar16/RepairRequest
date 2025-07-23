@@ -246,7 +246,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
           profileImageUrl: profile.photos?.[0]?.value || null,
           createdAt: new Date(),
           updatedAt: new Date(),
-        });
+        })
       }
       return done(null, user);
     } catch (err) {
