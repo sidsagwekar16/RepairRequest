@@ -6,6 +6,9 @@ import path from "path";
 import session from "express-session";
 import pgSimple from "connect-pg-simple";
 import { db } from "./db.js";
+import passport from "passport";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
+
 // import adminUsersRouter from "./routes/adminUsers";
 
 const app = express();
@@ -52,6 +55,10 @@ app.use(session({
   saveUninitialized: false,
   cookie: { secure: false, sameSite: "lax" }
 }));
+
+// === PASSPORT INIT (must be after session) ===
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Middleware to set req.user and req.isAuthenticated for local login
 app.use((req, res, next) => {

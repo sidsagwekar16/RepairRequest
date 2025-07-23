@@ -10,6 +10,8 @@ import crypto from "crypto";
 import z from "zod"
 import AWS from 'aws-sdk';
 import { sendEmail } from "./emailService";
+import passport from "passport";
+import { Strategy as GoogleStrategy } from "passport-google-oauth20";
 
 // Extend session interface to include user property
 declare module "express-session" {
@@ -217,8 +219,68 @@ export async function registerRoutes(app: Express): Promise<Server> {
   //   console.error("Failed to set up Google authentication:", error);
   // }
 
+  // === GOOGLE OAUTH SETUP ===
+  passport.use(new GoogleStrategy({
+    clientID: "232961433659-on25ek0ja8tu6f90pmk2n7vvh14ad0f6.apps.googleusercontent.com",
+    clientSecret: "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",
+    callbackURL: "/api/auth/google/callback",
+  }, async (accessToken, refreshToken, profile, done) => {
+    try {
+      // Find or create user in DB
+      const email = profile.emails?.[0]?.value;
+      const firstName = profile.name?.givenName || "";
+      const lastName = profile.name?.familyName || "";
+      if (!email) return done(null, false, { message: "No email from Google" });
+      let user = await dbStorage.getUserByEmail(email);
+      if (!user) {
+        // Create user with default role requester
+        user = await dbStorage.upsertUser({
+          id: profile.id,
+          email,
+          firstName,
+          lastName,
+          password: null,
+          role: "requester",
+          organizationId: null,
+          profileImageUrl: profile.photos?.[0]?.value || null,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        });
+      }
+      return done(null, user);
+    } catch (err) {
+      return done(err);
+    }
+  }));
+
+  passport.serializeUser((user: any, done) => {
+    done(null, user.id);
+  });
+  passport.deserializeUser(async (id: string, done) => {
+    try {
+      const user = await dbStorage.getUser(id);
+      done(null, user);
+    } catch (err) {
+      done(err);
+    }
+  });
+
+  app.use(passport.initialize());
+  app.use(passport.session());
+
+  // === GOOGLE OAUTH ROUTES ===
+  app.get("/api/auth/google", passport.authenticate("google", { scope: ["profile", "email"] }));
+
+  app.get(
+    "/api/auth/google/callback",
+    passport.authenticate("google", { failureRedirect: "/login" }),
+    (req, res) => {
+      // Successful authentication, redirect to dashboard or home
+      res.redirect("/");
+    }
+  );
+
   // PRIORITY OAUTH ROUTES: Register before all other middleware
-  const passport = await import('passport')
 
   // OAuth callback handler that bypasses middleware conflicts
   // app.get("/api/auth/callback/google", async (req, res) => {
