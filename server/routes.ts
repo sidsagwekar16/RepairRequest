@@ -1,3 +1,4 @@
+import "dotenv/config";
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage as dbStorage } from "./storage";
@@ -221,8 +222,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   // === GOOGLE OAUTH SETUP ===
   passport.use(new GoogleStrategy({
-    clientID: "232961433659-on25ek0ja8tu6f90pmk2n7vvh14ad0f6.apps.googleusercontent.com",
-    clientSecret: "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",
+    clientID: `${process.env.GOOGLE_CLIENT_ID}`,
+    clientSecret: `${process.env.GOOGLE_CLIENT_SECRET}`,
     callbackURL: "/api/auth/google/callback",
   }, async (accessToken, refreshToken, profile, done) => {
     try {
