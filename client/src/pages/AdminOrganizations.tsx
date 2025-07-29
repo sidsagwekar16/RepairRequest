@@ -177,6 +177,10 @@ export default function AdminOrganizations() {
                   <Label htmlFor="logoUrl">Logo URL (Optional)</Label>
                   <Input id="logoUrl" name="logoUrl" placeholder="https://..." />
                 </div>
+                <div>
+                  <Label htmlFor="buildingUrl">Building image</Label>
+                  <Input id="buildingUrl" name="buildingUrl" placeholder="https://..." />
+                </div>
               </div>
               <div className="flex gap-2">
                 <Button type="submit" disabled={createOrgMutation.isPending}>
